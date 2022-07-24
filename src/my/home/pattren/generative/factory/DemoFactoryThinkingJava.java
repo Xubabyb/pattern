@@ -5,7 +5,8 @@ public class DemoFactoryThinkingJava {
         serviceConsumer(ServiceAImpl.factory);
 
     }
-    public static void serviceConsumer(ServiceFactory factory){
+
+    public static void serviceConsumer(ServiceFactory factory) {
         Service service = factory.getService();
         service.methodA();
         service.methodB();
@@ -24,8 +25,11 @@ interface ServiceFactory {
 
 class ServiceAImpl implements Service {
 
-   public static ServiceFactory factory = ServiceAImpl::new;
+    public static ServiceFactory factory = ServiceAImpl::new;
 
+
+    private ServiceAImpl() {
+    } //TODO также можем закрыть доступ к конструтору классы и получать объекты только через фабрику
 
     @Override
     public void methodA() {
@@ -38,10 +42,13 @@ class ServiceAImpl implements Service {
 
     }
 }
+
 class ServiceBImpl implements Service {
 
     public static ServiceFactory factory = ServiceBImpl::new;
 
+    private ServiceBImpl() {
+    } //TODO также можем закрыть доступ к конструтору классы и получать объекты только через фабрику
 
     @Override
     public void methodA() {
